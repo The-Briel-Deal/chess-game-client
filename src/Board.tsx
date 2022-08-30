@@ -53,22 +53,6 @@ export default function Board() {
       });
     }
   }, [toMove]);
-  //   const testFunc = () => {
-  //     console.log(toMove);
-  //     if (
-  //       toMove.rowOne !== null &&
-  //       toMove.colOne !== null &&
-  //       toMove.rowTwo !== null &&
-  //       toMove.colTwo !== null
-  //     ) {
-  //       mutation.mutate({
-  //         rowOne: toMove.rowOne,
-  //         colOne: toMove.colOne,
-  //         rowTwo: toMove.rowTwo,
-  //         colTwo: toMove.colTwo,
-  //       });
-  //     }
-  //   };
   function selectPiece(row: number, col: number) {
     if (toMove.rowOne === null || toMove.colOne === null) {
       setToMove({
@@ -83,14 +67,12 @@ export default function Board() {
         rowTwo: row,
         colTwo: col,
       });
-      //   setTimeout(testFunc, 1000);
     }
   }
   const queryClient = useQueryClient();
   useMutation;
   return (
     <div style={{ display: "flex" }} className="App">
-      {JSON.stringify(toMove)}
       {data?.map((row, rowIndex) => {
         return (
           <div style={{ flexDirection: "row" }}>
@@ -156,22 +138,6 @@ export default function Board() {
           </div>
         );
       })}
-      <div style={{ flexDirection: "row" }}>
-        <div style={{ flexDirection: "column" }}>
-          <button
-            onClick={() => {
-              mutation.mutate({
-                rowOne: 0,
-                colOne: 3,
-                rowTwo: 0,
-                colTwo: 1,
-              });
-            }}
-          >
-            test
-          </button>
-        </div>
-      </div>
     </div>
   );
 }
