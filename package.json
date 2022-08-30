@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build-server": "tsc && vite build --outDir dist/server --ssr src/entry-server.js",
     "preview": "vite preview"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.2.3",
     "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

@@ -7,7 +7,7 @@ export default function Board() {
   const { isLoading, error, data, isFetching } = useQuery(
     ["getBoard"],
     (): Promise<Number[][]> =>
-      axios.get("http://localhost:8080/getBoard").then((res) => res.data)
+      axios.get(`/api/getBoard`).then((res) => res.data)
   );
   const [toMove, setToMove] = React.useState<{
     rowOne: null | number;
@@ -26,10 +26,7 @@ export default function Board() {
       colOne: Number;
       rowTwo: Number;
       colTwo: Number;
-    }) =>
-      axios
-        .post("http://localhost:8080/swapPiece", positions)
-        .then((res) => res.data),
+    }) => axios.post(`/api/swapPiece`, positions).then((res) => res.data),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["getBoard"]);
@@ -61,7 +58,6 @@ export default function Board() {
         colOne: col,
       });
     } else if (toMove.rowTwo === null || toMove.colTwo === null) {
-      console.log(row, col);
       setToMove({
         ...toMove,
         rowTwo: row,
@@ -75,11 +71,12 @@ export default function Board() {
     <div style={{ display: "flex" }} className="App">
       {data?.map((row, rowIndex) => {
         return (
-          <div style={{ flexDirection: "row" }}>
+          <div style={{ flexDirection: "row" }} key={rowIndex}>
             {row.map((cell, cellIndex) => {
               return (
                 <div
                   onClick={() => selectPiece(rowIndex, cellIndex)}
+                  key={cellIndex}
                   style={{
                     flexDirection: "column",
                     height: 50,
